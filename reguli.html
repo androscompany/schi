@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reguli</title>
+
+<style>
+
+body {
+    user-select: none;
+}
+
+body{
+    background:aqua;
+    color:#0b2c5f;
+    font-family:Arial, sans-serif;
+    font-size:18px;
+    margin:40px;
+    overflow-x:hidden;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:40px;
+    color:#08306b;
+}
+
+.text{
+    max-width:1200px;
+    margin:auto;
+}
+
+/* IMAGINE WRAP */
+.poza{
+    float:right;
+    width:400px;
+    margin-left:25px;
+    margin-bottom:15px;
+    border-radius:25px;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+/* PARAGRAFE */
+.paragraf{
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s;
+    margin-bottom:12px;
+    line-height:1.7;
+    text-align:justify;
+    text-indent:40px;
+}
+
+.paragraf.activ{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* BUTON */
+button{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    padding:18px 35px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:#0b3d91;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+button:hover{
+    transform:scale(1.08);
+    background:#1456c2;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Reguli</h1>
+
+<div class="text">
+
+    <img src="poza9.jpg" class="poza">
+
+    <div class="paragraf">
+        <b>Pentru o experiență bună la schi, trebuie să ai echipamentul prezentat  mai sus. Fiecare parte din echipament are propriul său rol:<br>
+		-casca= protejează capul atunci când cazi;<br>
+		-ochelarii de schi= îți apară ochii de zăpada lucioasă;<br>
+		-geaca, pantalonii de schi și mănușile= te încălzesc;<br>
+		-clăparii= pentru a fixa schiurile;<br>
+		-schiurile= îți permit să te deplasezi pe zăpadă.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Pentru a urca pe pârtie, te folosești de o crosă. Aceasta te va urca la înălțimea dorită.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Când ajungi la acea înălțime, scoate crosa dintre picioare și pregătește-te pentru a schia. Atenție! Dacă urci foarte sus, asigură-te că știi tehnicile de schi corect și că nu este ceață!</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Pentru a schia, trebuie să faci cât mai multe cristiane și să fii atent la persoane și la obstacole.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Pentru a frâna, va trebui să faci „felia de pizza”. Cu cât mai mare, cu atât mai puternică este forța de frânare.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Dacă unele zone sunt abrupte, încetinește obligatoriu! Te poți răni sau să cazi într-o prăpastie!</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Sper că v-au fost utile informațiile prezentate!</b>
+    </div>
+
+</div>
+
+<button onclick="urmatorulParagraf()">
+    ▶ PLAY
+</button>
+
+<script>
+
+let index = 0;
+const paragrafe = document.querySelectorAll(".paragraf");
+
+function urmatorulParagraf(){
+
+    if(index < paragrafe.length){
+        paragrafe[index].classList.add("activ");
+        index++;
+    }
+
+}
+
+</script>
+
+</body>
+</html>

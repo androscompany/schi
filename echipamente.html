@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echipament</title>
+
+<style>
+
+body {
+    user-select: none;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:aqua;
+    font-family:Arial, sans-serif;
+    overflow:hidden;
+}
+
+/* SLIDESHOW CONTAINER */
+.slideshow{
+    text-align:center;
+}
+
+/* TITLU */
+.titlu{
+    font-size:40px;
+    color:#08306b;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+/* IMAGINE */
+img{
+    width:80vw;
+    max-width:900px;
+    height:70vh;
+    object-fit:cover;
+    border-radius:25px;
+    box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+/* BUTOANE */
+.controls{
+    margin-top:20px;
+}
+
+button{
+    padding:12px 25px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    background:#0b3d91;
+    color:white;
+    cursor:pointer;
+    margin:0 10px;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+    background:#1456c2;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="slideshow">
+
+    <div class="titlu" id="titlu">Schiuri</div>
+
+    <img id="imagine" src="poza3.jpg">
+
+    <div class="controls">
+        <button onclick="prev()">⟵</button>
+        <button onclick="next()">⟶</button>
+    </div>
+
+</div>
+
+<script>
+
+const imagini = [
+    "poza3.jpg",
+    "poza4.jpg",
+    "poza5.png",
+    "poza6.jfif",
+    "poza7.png",
+    "poza8.png"
+];
+
+const titluri = [
+    "Schiuri",
+    "Clăpari",
+    "Pantaloni de schi",
+    "Geacă de schi",
+    "Ochelari de schi",
+    "Cască de schi"
+];
+
+let index = 0;
+
+function update(){
+    document.getElementById("imagine").src = imagini[index];
+    document.getElementById("titlu").innerText = titluri[index];
+}
+
+function next(){
+    index = (index + 1) % imagini.length;
+    update();
+}
+
+function prev(){
+    index = (index - 1 + imagini.length) % imagini.length;
+    update();
+}
+
+</script>
+
+</body>
+</html>

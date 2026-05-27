@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz</title>
+
+<style>
+
+body {
+    user-select: none;
+}
+
+body{
+    background:aqua;
+    font-family:Arial, sans-serif;
+    color:#0b2c5f;
+    margin:35px;
+}
+
+h1{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:30px;
+    color:#08306b;
+}
+
+/* CHENARE ÎNTREBĂRI */
+.intrebare{
+    position:relative;
+    background:rgba(255,255,255,0.5);
+    padding:20px;
+    padding-right:230px;
+    min-height:170px;
+    border-radius:20px;
+    margin-bottom:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
+
+.intrebare h2{
+    margin-bottom:15px;
+    color:#0b3d91;
+}
+
+/* IMAGINI ÎN DREAPTA */
+.pozaQuiz{
+    position:absolute;
+    right:20px;
+    top:5px;
+    width:175px;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+/* RĂSPUNSURI */
+label{
+    display:block;
+    margin-bottom:12px;
+    padding:10px;
+    border-radius:10px;
+    transition:0.3s;
+    font-size:18px;
+}
+
+input{
+    margin-right:10px;
+    transform:scale(1.2);
+}
+
+/* BUTON */
+button{
+    padding:15px 25px;
+    font-size:18px;
+    background:#0b3d91;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1456c2;
+}
+
+/* SCOR */
+#scor{
+    font-size:24px;
+    margin-left:20px;
+    font-weight:bold;
+    color:#08306b;
+}
+
+/* CORECT / GREȘIT */
+.corect{
+    background:rgba(0,255,0,0.3);
+    border:2px solid green;
+}
+
+.gresit{
+    background:rgba(255,0,0,0.25);
+    border:2px solid red;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🎿 Quiz despre schi</h1>
+
+<!-- ÎNTREBAREA 1 -->
+<div class="intrebare">
+
+    <img src="poza13.jpg" class="pozaQuiz">
+
+    <h2>1. Cine a inspirat lumea să descopere pasiunea de schi?</h2>
+
+    <label id="q1a">
+        <input type="radio" name="q1">
+        a) Marcel Hirscher
+    </label>
+
+    <label id="q1b">
+        <input type="radio" name="q1">
+        b) Mikaela Shiffrin
+    </label>
+
+    <label id="q1c">
+        <input type="radio" name="q1">
+        c) Lindsey Vonn
+    </label>
+</div>
+
+<!-- ÎNTREBAREA 2 -->
+<div class="intrebare">
+
+    <img src="poza14.jpg" class="pozaQuiz">
+
+    <h2>2. Marcel Hirscher:</h2>
+
+    <label id="q2a">
+        <input type="radio" name="q2">
+        a) A fost un mare campion la schiul alpin.
+    </label>
+
+    <label id="q2b">
+        <input type="radio" name="q2">
+        b) A făcut hochei.
+    </label>
+
+    <label id="q2c">
+        <input type="radio" name="q2">
+        c) A fost un schior australian
+    </label>
+</div>
+
+<!-- ÎNTREBAREA 3 -->
+<div class="intrebare">
+
+    <img src="poza15.jpg" class="pozaQuiz">
+
+    <h2>3. Aproximativ câte țări au stațiuni de schi?</h2>
+
+    <label id="q3a">
+        <input type="radio" name="q3">
+        a) 70
+    </label>
+
+    <label id="q3b">
+        <input type="radio" name="q3">
+        b) 50
+    </label>
+
+    <label id="q3c">
+        <input type="radio" name="q3">
+        c) 100
+    </label>
+</div>
+
+<!-- ÎNTREBAREA 4 -->
+<div class="intrebare">
+
+    <img src="poza16.jpg" class="pozaQuiz">
+
+    <h2>4. Care este intrusul?</h2>
+
+    <label id="q4a">
+        <input type="radio" name="q4">
+        a) schi
+    </label>
+
+    <label id="q4b">
+        <input type="radio" name="q4">
+        b) înot
+    </label>
+
+    <label id="q4c">
+        <input type="radio" name="q4">
+        c) snowboarding
+    </label>
+</div>
+
+<button onclick="verifica()">✔ Verifică</button>
+<span id="scor"></span>
+
+<script>
+
+function verifica(){
+
+    let puncte = 0;
+
+    document.querySelectorAll("label").forEach(el=>{
+        el.classList.remove("corect","gresit");
+    });
+
+    const corecte = {
+        q1:"c",
+        q2:"a",
+        q3:"a",
+        q4:"b"
+    };
+
+    for(let q in corecte){
+
+        let ales = document.querySelector(`input[name="${q}"]:checked`);
+
+        /* BLOCARE RĂSPUNSURI */
+        document.querySelectorAll(`input[name="${q}"]`).forEach(inp=>{
+            inp.disabled = true;
+        });
+
+        if(ales){
+
+            let label = ales.parentElement;
+            let id = label.id;
+
+            /* CORECT */
+            if(id === q + corecte[q]){
+                label.classList.add("corect");
+                puncte++;
+            }
+
+            /* GREȘIT */
+            else{
+                label.classList.add("gresit");
+                document.getElementById(q + corecte[q]).classList.add("corect");
+            }
+
+        }else{
+            document.getElementById(q + corecte[q]).classList.add("corect");
+        }
+    }
+
+    document.getElementById("scor").innerHTML =
+        "Punctaj: " + puncte + " / 4";
+}
+
+</script>
+
+</body>
+</html>

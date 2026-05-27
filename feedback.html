@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback</title>
+
+<style>
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.github-link{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    user-select:none;
+    font-family:Arial, sans-serif;
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+}
+.despre-site{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+	color:white;
+}
+
+/* BACKGROUND */
+.background{
+    position:absolute;
+    inset:0;
+    background:url("poza18.png") center center/cover no-repeat;
+}
+
+/* OVERLAY ÎNTUNECAT */
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(2px);
+}
+
+/* CONȚINUT */
+.content{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+/* TITLU */
+h1{
+    margin-bottom:40px;
+    color:white;
+    font-size:55px;
+    text-shadow:0 0 15px rgba(255,255,255,0.4);
+}
+
+.stars{
+    display:flex;
+    gap:12px;
+    font-size:70px;
+    cursor:pointer;
+}
+
+/* fiecare stea ca un „buton” */
+.star{
+    color:#666;
+    transition:0.25s;
+    user-select:none;
+
+    /* fundal + formă */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:80px;
+    height:80px;
+    border-radius:18px;
+
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(4px);
+
+    /* ⭐ CONTUR NEGRU */
+    -webkit-text-stroke:2px black;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,0.6);
+}
+
+.star:hover{
+    transform:scale(1.15);
+    background:rgba(255,255,255,0.3);
+}
+
+/* stea activă */
+.star.active{
+    color:gold;
+
+    -webkit-text-stroke:2px black;
+
+    text-shadow:
+        0 0 15px gold,
+        0 2px 5px rgba(0,0,0,0.6);
+    background:rgba(255,215,0,0.15);
+}
+
+.androscompany{
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+/* BUTON */
+#sendBtn{
+    margin-top:35px;
+    padding:14px 35px;
+    font-size:20px;
+    border:none;
+    border-radius:15px;
+    background:white;
+    color:#0b3d91;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+
+    opacity:0;
+    transform:translateY(15px);
+    pointer-events:none;
+}
+
+#sendBtn.show{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+}
+
+#sendBtn:hover{
+    background:#0b3d91;
+    color:white;
+    transform:scale(1.08);
+}
+
+/* MESAJ */
+#message{
+    margin-top:25px;
+    font-size:24px;
+    color:white;
+    text-shadow:0 0 10px rgba(0,0,0,0.6);
+    max-width:700px;
+}
+
+
+/* ZĂPADĂ */
+.snow{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    overflow:hidden;
+}
+
+.snowflake{
+    position:absolute;
+    top:-50px;
+    color:white;
+    opacity:0.8;
+    animation:fall linear infinite;
+    text-shadow:0 0 10px white;
+}
+
+@keyframes fall{
+    0%{
+        transform:translateY(-50px);
+    }
+
+    100%{
+        transform:translateY(110vh);
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="background"></div>
+<div class="overlay"></div>
+
+<!-- ZĂPADĂ -->
+<div class="snow"></div>
+
+<!-- CONȚINUT -->
+<div class="content">
+
+    <h1>Feedback</h1>
+
+    <div class="stars" id="stars">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+    </div>
+
+    <button id="sendBtn">Trimite!</button>
+
+    <div id="message"></div>
+
+</div>
+
+<script>
+
+/* STELE */
+const stars = document.querySelectorAll(".star");
+const container = document.getElementById("stars");
+const btn = document.getElementById("sendBtn");
+const message = document.getElementById("message");
+
+let selectedRating = 0;
+let submitted = false;
+
+/* HOVER + CLICK */
+stars.forEach(star => {
+
+    star.addEventListener("mouseover", () => {
+
+        if(submitted) return;
+
+        const value = parseInt(star.dataset.value);
+        highlightStars(value);
+    });
+
+    star.addEventListener("click", () => {
+
+        if(submitted) return;
+
+        selectedRating = parseInt(star.dataset.value);
+
+        highlightStars(selectedRating);
+
+        btn.classList.add("show");
+    });
+});
+
+/* RESTORE */
+container.addEventListener("mouseleave", () => {
+
+    if(submitted) return;
+
+    highlightStars(selectedRating);
+});
+
+/* COLORARE STELE */
+function highlightStars(value){
+
+    stars.forEach(star => {
+
+        const starValue = parseInt(star.dataset.value);
+
+        star.classList.toggle(
+            "active",
+            starValue <= value
+        );
+    });
+}
+
+/* TRIMITERE */
+btn.addEventListener("click", () => {
+
+    submitted = true;
+
+    container.style.cursor = "default";
+
+    highlightStars(selectedRating);
+
+    btn.style.display = "none";
+
+    switch(selectedRating){
+
+        case 1:
+            message.textContent =
+            "Îmi pare rău pentru experiența neplăcută!";
+            break;
+
+        case 2:
+            message.textContent =
+            "Îmi pare rău că nu v-a plăcut site-ul!";
+            break;
+
+        case 3:
+            message.textContent =
+            "Mulțumesc! Îmi pare bine!";
+            break;
+
+        case 4:
+            message.textContent =
+            "Mulțumesc mult! V-a plăcut foarte mult site-ul!";
+            break;
+
+        case 5:
+            message.textContent =
+            "Uau! Mulțumesc din tot sufletul!";
+            break;
+
+        default:
+            message.textContent =
+            "Vă rog să vă spuneți părerea!";
+    }
+});
+
+/* ZĂPADĂ */
+const snowContainer = document.querySelector(".snow");
+
+for(let i=0; i<40; i++){
+
+    let snowflake = document.createElement("div");
+
+    snowflake.classList.add("snowflake");
+
+    snowflake.innerHTML = "❄";
+
+    snowflake.style.left =
+        Math.random() * 100 + "vw";
+
+    snowflake.style.fontSize =
+        (20 + Math.random() * 25) + "px";
+
+    snowflake.style.animationDuration =
+        (10 + Math.random() * 10) + "s";
+
+    snowflake.style.animationDelay =
+        Math.random() * 10 + "s";
+
+    snowContainer.appendChild(snowflake);
+}
+
+</script>
+<div class="despre-site"><a href="site.html">Despre site</a></div>
+<div class="github-link">
+    <a href="https://github.com/androscompany" target="_blank">
+        androscompany
+    </a>
+</div>
+</div>
+</body>
+</html>

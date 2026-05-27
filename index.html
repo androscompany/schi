@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pasiunea mea - schiul</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body {
+    user-select: none;
+}
+
+body{
+  height:100vh;
+  overflow:hidden;
+  font-family:Arial, sans-serif;
+}
+
+
+/* IMAGINE FULLSCREEN */
+.background{
+  position:relative;
+  width:100%;
+  height:100vh;
+  background:url("intro.jpeg") center center/cover no-repeat;
+}
+
+/* STRAT ÎNTUNECAT */
+.overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+}
+
+/* CONTINUT CENTRAL */
+.content{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  text-align:center;
+  z-index:2;
+}
+
+/* BUTOANE */
+button{
+  padding:20px 50px;
+  font-size:35px;
+  border:none;
+  border-radius:15px;
+  background:white;
+  color:#0b3d91;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+  box-shadow:0 0 25px rgba(255,255,255,0.6);
+}
+
+button:hover{
+  transform:scale(1.1);
+  background:#0b3d91;
+  color:white;
+}
+
+/* CREDITS (dreapta jos) */
+#creditsBtn{
+  position:absolute;
+  bottom:20px;
+  right:20px;
+  font-size:20px;
+  padding:12px 25px;
+  z-index:3;
+}
+
+#creditsBox{
+  position:absolute;
+  bottom:80px;
+  right:20px;
+  width:250px;
+  padding:15px;
+  background:rgba(255,255,255,0.95);
+  border-radius:10px;
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
+  display:none;
+  z-index:3;
+  color:#0b3d91;
+  font-size:16px;
+}
+
+/* DESPRE (stânga jos) */
+#despreBtn{
+  position:absolute;
+  bottom:20px;
+  left:20px;
+  font-size:20px;
+  padding:12px 25px;
+  z-index:3;
+}
+
+#despreBox{
+  position:absolute;
+  bottom:80px;
+  left:20px;
+  width:250px;
+  padding:15px;
+  background:rgba(255,255,255,0.95);
+  border-radius:10px;
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
+  display:none;
+  z-index:3;
+  color:#0b3d91;
+  font-size:16px;
+}
+
+</style>
+</head>
+<!-- FULGI DE NEA -->
+<div class="snow"></div>
+
+<style>
+
+/* STRATUL CU ZĂPADĂ */
+.snow{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+}
+
+/* FULGI */
+.snowflake{
+  position:absolute;
+  top:-50px;
+  color:white;
+  user-select:none;
+  animation-name:fall;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+  opacity:0.8;
+  text-shadow:0 0 10px white;
+}
+
+@keyframes fall{
+  0%{
+    transform:translateY(-50px);
+  }
+
+  100%{
+    transform:translateY(110vh);
+  }
+}
+
+</style>
+
+<script>
+
+/* FULGI MARI ȘI RARI */
+const snowContainer = document.querySelector(".snow");
+
+for(let i=0; i<40; i++){
+
+  let snowflake = document.createElement("div");
+  snowflake.classList.add("snowflake");
+
+  snowflake.innerHTML = "❄";
+
+  /* poziție random */
+  snowflake.style.left = Math.random() * 100 + "vw";
+
+  /* mărime mare */
+  snowflake.style.fontSize = (25 + Math.random() * 25) + "px";
+
+  /* viteză lentă */
+  snowflake.style.animationDuration = (10 + Math.random() * 10) + "s";
+
+  /* delay random */
+  snowflake.style.animationDelay = Math.random() * 10 + "s";
+
+  snowContainer.appendChild(snowflake);
+}
+
+</script>
+
+<body>
+
+<div class="background">
+  <div class="overlay"></div>
+
+  <div class="content">
+    <button onclick="window.location.href='index2.html'">
+      START!
+    </button>
+  </div>
+
+  <!-- CREDITS -->
+  <div id="creditsBox">
+    <b>Credits</b><br><br>
+    © 2026 Minciu Andrei Nicolas<br>
+    Imaginile proprii utilizate<br>
+	Music track: A Better Future by Bluewave<br>
+    Source: <a href=https://freetouse.com/music>Royalty Music</a><br>
+    Free No Copyright Music Download<br>
+    Realizat în România<br>
+	Share location:<a href="https://www.google.com/maps?cid=13399475535979150835&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&hl=en-US&source=embed"> Google Maps</a><br>
+	Weather:<a href="https://www.accuweather.com/ro/ro/vartop/281838/weather-forecast/281838"> AccuWeather</a>
+  </div>
+
+  <button id="creditsBtn">Credits</button>
+
+  <!-- DESPRE -->
+  <div id="despreBox">
+    <b>Despre</b><br><br>
+    Povestesc despre pasiunea mea.<br>
+    Tema: Pasiunea mea - Schiul.<br>
+  </div>
+
+  <button id="despreBtn">Despre</button>
+
+</div>
+
+<script>
+
+let box = document.getElementById("creditsBox");
+let btn = document.getElementById("creditsBtn");
+
+btn.addEventListener("click", function(){
+  box.style.display = (box.style.display === "block") ? "none" : "block";
+});
+
+let despreBox = document.getElementById("despreBox");
+let despreBtn = document.getElementById("despreBtn");
+
+despreBtn.addEventListener("click", function(){
+  despreBox.style.display = (despreBox.style.display === "block") ? "none" : "block";
+});
+
+</script>
+
+</body>
+</html>

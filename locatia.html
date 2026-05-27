@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Locația</title>
+
+<style>
+
+body {
+    user-select: none;
+}
+
+body{
+    background:aqua;
+    color:#0b2c5f;
+    font-family:Arial, sans-serif;
+    font-size:18px;
+    margin:40px;
+    overflow-x:hidden;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:40px;
+    color:#08306b;
+}
+
+/* LINK */
+a{
+    text-decoration:none;
+    color:#08306b;
+    font-weight:bold;
+}
+
+.text{
+    max-width:1200px;
+    margin:auto;
+}
+
+/* IMAGINE */
+.poza{
+    float:right;
+    width:450px;
+    margin-left:25px;
+    margin-bottom:15px;
+    border-radius:25px;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+/* PARAGRAFE */
+.paragraf{
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s;
+    margin-bottom:12px;
+    line-height:1.7;
+    text-align:justify;
+    text-indent:40px;
+}
+
+.paragraf.activ{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* BUTON */
+button{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    padding:18px 35px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:#0b3d91;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+button:hover{
+    transform:scale(1.08);
+    background:#1456c2;
+}
+
+/* MAP POPUP */
+#mapOverlay{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+#mapBox{
+    width:80%;
+    height:70%;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 0 25px black;
+}
+
+iframe{
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>
+  <a href="#" onclick="openMap(event)">Locația</a>
+</h1>
+
+<div class="text">
+
+    <img src="poza2.png" class="poza">
+
+    <div class="paragraf">
+        <b>De obicei, atunci când schiez, merg cu mașina și mă cazez la o cabană din satul Islaz, în județul Alba. Acolo sunt mulți brazi, locuri de cazare, copii prietenoși și fericiți și foarte multă zăpadă, adică mormane de aproximativ un metru.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Eu schiez în localitatea Vârtop. Acolo sunt 2 pârtii:<br>
+         -Vârtop II, fiind pârtie de nivel mediu; <br>
+         -Vârtop I, fiind pârtie de nivel avansat, unde schiez cel mai des.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Din fericire, zăpada se păstrează foarte bine, deoarece este adăpost. Razele soarelui nu pătrund atât de bine, temperatura scăzând uneori până la -15°C. BRRRR!</b>
+    </div>
+
+    <div class="paragraf">
+        <b>În apropiere, este și un restaurant, numit "Piatra Grăitoare". Mâncarea de acolo este foarte bună! De la restaurant poți închiria schiuri, clăpari și sănii.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>De asemenea, în aceeași zonă sunt și multe tarabe cu tot felul de obiecte și bunătăți și pârtii special amenajate pentru săniuțe.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Locul în care schiez, dar până și unde stau este excelent!</b>
+    </div>
+	<div class="paragraf">
+	     <b>Apăsați pentru a afla vremea de la Vârtop!<br>
+        <a href="https://www.accuweather.com/ro/ro/vartop/281838/hourly-weather-forecast/281838"><img src="poza17.png" width=250px></a>
+    </div>
+
+</div>
+
+<button onclick="urmatorulParagraf()">▶ PLAY</button>
+
+<!-- MAP POPUP -->
+<div id="mapOverlay" onclick="closeMap()">
+    <div id="mapBox" onclick="event.stopPropagation()">
+        <iframe src="https://www.google.com/maps?q=Vârtop&output=embed"></iframe>
+    </div>
+</div>
+
+<script>
+
+let index = 0;
+const paragrafe = document.querySelectorAll(".paragraf");
+
+function urmatorulParagraf(){
+    if(index < paragrafe.length){
+        paragrafe[index].classList.add("activ");
+        index++;
+    }
+}
+
+function openMap(e){
+    e.preventDefault();
+    document.getElementById("mapOverlay").style.display = "flex";
+}
+
+function closeMap(){
+    document.getElementById("mapOverlay").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>

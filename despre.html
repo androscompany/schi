@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Despre mine</title>
+
+<style>
+
+body {
+    user-select: none;
+}
+
+body{
+    background:aqua;
+    color:#0b2c5f;
+    font-family:Arial, sans-serif;
+    font-size:18px;
+    margin:40px;
+    overflow-x:hidden;
+	overflow-y:hidden;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+    font-size:40px;
+    color:#08306b;
+}
+
+.text{
+    max-width:1200px;
+    margin:auto;
+}
+
+/* IMAGINE WRAP */
+.poza{
+    float:right;
+    width:350px;
+    margin-left:25px;
+    margin-bottom:15px;
+    border-radius:25px;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+/* PARAGRAFE */
+.paragraf{
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s;
+    margin-bottom:12px;
+    line-height:1.7;
+    text-align:justify;
+    text-indent:40px;
+}
+
+.paragraf.activ{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* BUTON */
+button{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    padding:18px 35px;
+    font-size:22px;
+    border:none;
+    border-radius:12px;
+    background:#0b3d91;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+button:hover{
+    transform:scale(1.08);
+    background:#1456c2;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Despre mine</h1>
+
+<div class="text">
+
+    <img src="poza10.png" class="poza">
+
+    <div class="paragraf">
+        <b>Mie îmi place foarte mult să schiez!</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Schiul este activitatea mea preferată! O ador! Atunci când schiez, explorez locuri noi, văd peisaje minunate, prind viteză și văd multă zăpadă pe drum! Schiatul este o combinație între munca oamenilor și mama natură!</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Eu schiez la un nivel avansat. Nu chiar expert, dar mă descurc destul de bine. Știu multe tehnici avansate și cum să mă ridic dacă vreodată cad și cel mai important lucru: știu CÂND să schiez. De exemplu, nu poți schia în anumite zone dacă este ceață sau când dimineața zăpada este foarte tare, aproape ca gheața.</b>
+    </div>
+
+
+    <div class="paragraf">
+        <b>În general, schiez pe Vârtop I, dar atunci când zăpada este foarte tare, e întunecat sau ceață, din păcate, sunt limitat la Vârtop II. Merg pe Vârtop I mai des, deoarece pârtia este de vreo șapte ori mai lungă și de cinci ori mai lată decât cealaltă.</b>
+    </div>
+
+    <div class="paragraf">
+        <b>Echipamentul meu este de calitate, ca să îmi fie cald și comod. Fără echipament de calitate, nu pot schia bine. </b>
+    </div>
+
+    <div class="paragraf">
+        <b>Sunt foarte fericit atunci când schiez!</b>
+    </div>
+
+</div>
+
+<button onclick="urmatorulParagraf()">
+    ▶ PLAY
+</button>
+
+<script>
+
+let index = 0;
+const paragrafe = document.querySelectorAll(".paragraf");
+
+function urmatorulParagraf(){
+
+    if(index < paragrafe.length){
+        paragrafe[index].classList.add("activ");
+        index++;
+    }
+
+}
+
+</script>
+
+</body>
+</html>

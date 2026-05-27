@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curiozități</title>
+
+<style>
+
+body {
+    user-select: none;
+}
+
+body{
+    background:aqua;
+    color:#0b2c5f;
+    font-family:Arial, sans-serif;
+    font-size:18px;
+    margin:35px;
+	position:relative;
+}
+
+h1{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:25px;
+    color:#08306b;
+}
+
+/* SECTIUNI */
+.sectiune{
+    background:rgba(255,255,255,0.45);
+    padding:18px;
+    border-radius:20px;
+    margin-bottom:18px;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
+
+/* TITLU */
+.sectiune h2{
+    color:#0b3d91;
+    margin-bottom:10px;
+    font-size:30px;
+}
+
+/* TEXT */
+.sectiune p{
+    line-height:1.7;
+    text-align:justify;
+    text-indent:40px;
+}
+
+/* IMAGINE PRINCIPALĂ */
+/* IMAGINE PRINCIPALĂ */
+.poza{
+    float:right;
+    width:400px;
+    margin-left:25px;
+    margin-bottom:25px;
+    margin-top:-10px;
+    border-radius:25px;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+    position:relative;
+    z-index:5;
+}
+}
+
+/* CURIOZITĂȚI */
+.curiozitati{
+    margin-top:25px;
+    background:rgba(255,255,255,0.5);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+
+/* LISTĂ */
+.curiozitati h2{
+    color:#08306b;
+    margin-bottom:15px;
+    font-size:32px;
+}
+
+.curiozitati ul{
+    padding-left:30px;
+}
+
+.curiozitati li{
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+/* POZA FINALĂ */
+.poza12{
+    display:block;
+    width:250px;
+    margin:80px 0 20px auto;
+    border-radius:20px;
+    box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+/* FADE SYSTEM */
+.box{
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s ease;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* BUTON START */
+button{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:15px 25px;
+    font-size:18px;
+    background:#0b3d91;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    z-index:999;
+}
+
+button:hover{
+    background:#1456c2;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 class="box" id="t">Mari celebrități ale schiului</h1>
+
+<button onclick="start()">▶ PLAY</button>
+
+<img src="poza11.png" class="poza box" id="p1">
+
+<div class="sectiune box" id="s1">
+    <h2>Mikaela Shiffrin</h2>
+    <p><b>Mikaela Shiffrin este una dintre cele mai cunoscute schioare din lume și una dintre cele mai talentate sportive din istoria schiului alpin. Ea a câștigat foarte multe concursuri internaționale și numeroase medalii importante. Mikaela este apreciată pentru viteza, echilibrul și tehnica sa extraordinară pe pârtie. Mulți copii și tineri care practică schiul o consideră un model și o sursă de inspirație.</b></p>
+</div>
+
+<div class="sectiune box" id="s2">
+    <h2>Marcel Hirscher</h2>
+    <p><b>Marcel Hirscher este un fost mare campion austriac la schi alpin. El a dominat ani la rând competițiile mondiale și a câștigat multe trofee importante. Marcel era renumit pentru controlul excelent pe schiuri și pentru modul spectaculos în care cobora pârtiile dificile. După retragere, el a rămas una dintre cele mai respectate persoane din lumea schiului.</b></p>
+</div>
+
+<div class="sectiune box" id="s3">
+    <h2>Lindsey Vonn</h2>
+    <p><b>Lindsey Vonn este una dintre cele mai faimoase persoane din istoria schiului alpin. Ea a câștigat numeroase competiții internaționale și medalii olimpice datorită vitezei și tehnicii sale impresionante. De-a lungul carierei, Lindsey Vonn a devenit un simbol al curajului și al ambiției în sporturile de iarnă. Performanțele sale au inspirat milioane de oameni din întreaga lume să descopere pasiunea pentru schi.</b></p>
+</div>
+
+<div class="curiozitati box" id="c">
+    <h2>Știați că?</h2>
+
+    <ul>
+        <li>Schiul este unul dintre cele mai practicate sporturi de iarnă din lume, fiind în top 10 sporturi recreaționale globale, alături de fotbal și înot.</li>
+        <li>Primele dovezi ale schiului au peste 4000 de ani, fiind descoperite desene pe pietre în Scandinavia.</li>
+        <li>În unele competiții de schi alpin, sportivii pot atinge viteze de peste 130 km/h pe pârtie.</li>
+        <li>Schiurile moderne sunt fabricate din materiale foarte ușoare, precum carbonul, pentru a crește viteza și controlul.</li>
+        <li>Există stațiuni de schi în peste 70 de țări din lume, inclusiv în locuri neașteptate precum Maroc sau Japonia.</li>
+    </ul>
+</div>
+
+<img src="poza12.png" class="poza12 box" id="p12">
+
+<script>
+
+let step = 0;
+
+const items = ["t","p1","s1","s2","s3","c","p12"];
+
+function start(){
+
+    if(step < items.length){
+
+        document.getElementById(items[step]).classList.add("show");
+
+        step++;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

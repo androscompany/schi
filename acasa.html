@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acasă/</title>
+
+<style>
+
+body {
+    user-select: none;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html, body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:black;
+    font-family:Arial, sans-serif;
+}
+
+/* VIDEO FULLSCREEN */
+video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:black;
+}
+
+/* EFECT MODERN */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.05)
+    );
+    pointer-events:none;
+}
+
+/* TITLU OPTIONAL */
+.title{
+    position:fixed;
+    bottom:30px;
+    left:40px;
+    color:white;
+    font-size:35px;
+    letter-spacing:3px;
+    text-shadow:0 0 15px black;
+    z-index:2;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO -->
+<video autoplay muted loop playsinline>
+    <source src="film1.mp4" type="video/mp4">
+</video>
+
+<!-- EFECT -->
+<div class="overlay"></div>
+
+<script>
+
+/* BLOCARE CLICK DREAPTA */
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* BLOCARE SPACE */
+document.addEventListener("keydown", function(e){
+    if(e.code === "Space"){
+        e.preventDefault();
+    }
+});
+
+</script>
+
+</body>
+</html>
